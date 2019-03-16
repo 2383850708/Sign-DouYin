@@ -129,33 +129,39 @@ def request_dict(req):
 
 
 def api_test():
-    # 生成设备信息
+    # ------------------------------------------------------------------------------------------------
+    # gen device info
     device_info = get_new_device_info()
     print(device_info)
     user_id = "110725736365"
     time_now = str(int(time()))
     aweme_id = "6615981222587796743"
+    # ------------------------------------------------------------------------------------------------
+    # sign demo
+    # sign service is for douyin android 2.9.0~3.9.0
+    print(sign(
+        "https://api-hl.amemv.com/aweme/v1/commit/follow/user/?user_id=60514131756&type=1&retry_type=no_retry&iid=65734914098&device_id=66679620049&ac=wifi&channel=wandoujia_zhiwei&aid=1128&app_name=aweme&version_code=290&version_name=2.9.0&device_platform=android&ssmix=a&device_type=ONEPLUS%20A6010&device_brand=OnePlus&language=zh&os_api=28&os_version=9&uuid=432635101856947&openudid=8522097096784651&manifest_version_code=290&resolution=1080*2261&dpi=420&update_version_code=2902&_rticket=1552285914901"))
 
-    # 签名测试
-    # print(sign("https://api-hl.amemv.com/aweme/v1/commit/follow/user/?user_id=60514131756&type=1&retry_type=no_retry&iid=65734914098&device_id=66679620049&ac=wifi&channel=wandoujia_zhiwei&aid=1128&app_name=aweme&version_code=290&version_name=2.9.0&device_platform=android&ssmix=a&device_type=ONEPLUS%20A6010&device_brand=OnePlus&language=zh&os_api=28&os_version=9&uuid=432635101856947&openudid=8522097096784651&manifest_version_code=290&resolution=1080*2261&dpi=420&update_version_code=2902&_rticket=1552285914901"))
-
-    # 功能包装
-    # 获取首页feed
+    # ------------------------------------------------------------------------------------------------
+    # functions wrap
+    # Home feeds
     print(wrap_api(device_info, "v1/feed", {'count': 6, 'type': 0, 'max_cursor': 0, 'min_cursor': -1, 'pull_type': 2}))
 
-    # 获取某人的视频
-    # print(wrap_api(device_info, "v1/aweme/post", {"user_id": user_id, "max_cursor": 0, "count": 20}))
-    # 获取某人喜欢的视频
-    # print(wrap_api(device_info, "v1/aweme/favorite", {"user_id": user_id, "max_cursor": 0, "count": 20}))
-    # 获取某人信息
-    # print(wrap_api(device_info, "v1/user", {"user_id": user_id}))
-    # 获取某人的关注列表
-    # print(wrap_api(device_info, "v1/user/following/list", {"user_id": user_id, "count": 20, "max_time": time_now}))
-    # 获取某人的粉丝列表
-    # print(wrap_api(device_info, "v1/user/follower/list", {"user_id": user_id, "count": 20, "max_time": time_now}))
+    # someone's videos
+    print(wrap_api(device_info, "v1/aweme/post", {"user_id": user_id, "max_cursor": 0, "count": 20}))
+    # someone's likes
+    print(wrap_api(device_info, "v1/aweme/favorite", {"user_id": user_id, "max_cursor": 0, "count": 20}))
+    # someone's info
+    print(wrap_api(device_info, "v1/user", {"user_id": user_id}))
+    # someone's followings
+    print(wrap_api(device_info, "v1/user/following/list", {"user_id": user_id, "count": 20, "max_time": time_now}))
+    # someone's followers
+    print(wrap_api(device_info, "v1/user/follower/list", {"user_id": user_id, "count": 20, "max_time": time_now}))
 
-    # 获取某个视频的评论列表
-    # print(wrap_api(device_info, "v1/comment/list", {"aweme_id": aweme_id, "cursor": 0, "count": 20}))
+    # video's coments
+    print(wrap_api(device_info, "v1/comment/list", {"aweme_id": aweme_id, "cursor": 0, "count": 20}))
+
+    # ------------------------------------------------------------------------------------------------
 
 
 if __name__ == '__main__':
